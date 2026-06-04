@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Captain's Portfolio | Commercial Pilot</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap');
+        body { 
+            font-family: 'Inter', sans-serif; 
+        }
+        .hero-bg {
+            background: linear-gradient(rgba(15, 23, 42, 0.85), rgba(15, 23, 42, 0.95)), 
+                        url('https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=1920&q=80') center/cover;
+        }
+        
+        /* Custom Slide-Down Animation */
+        @keyframes slideDown {
+            0% { 
+                opacity: 0; 
+                transform: translateY(-40px); 
+            }
+            100% { 
+                opacity: 1; 
+                transform: translateY(0); 
+            }
+        }
+        .animate-slide-down {
+            animation: slideDown 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+    <header class="hero-bg text-white min-h-screen flex flex-col justify-center items-center px-6 text-center">
+        
+        <div class="animate-slide-down flex flex-col items-center">
+            
+            <img src="https://via.placeholder.com/200" alt="Pilot Profile Picture" 
+                 class="w-48 h-48 rounded-full border-4 border-blue-500 shadow-2xl object-cover mb-8 
+                        transition-transform duration-300 ease-out 
+                        hover:scale-110 active:scale-100 cursor-pointer">
+            
+            <h1 class="text-5xl md:text-7xl font-extrabold tracking-tight mb-4">Captain John Doe</h1>
+            <p class="text-xl md:text-2xl font-light text-gray-300 mb-8 tracking-wide uppercase">Commercial Airline Pilot</p>
+            
+            <div class="flex space-x-4">
+                <a href="#about" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-8 rounded-full transition duration-300 shadow-lg">The Journey</a>
+                <a href="#contact" class="bg-transparent border border-gray-400 hover:border-white text-white font-semibold py-3 px-8 rounded-full transition duration-300">Contact</a>
+            </div>
+        </div>
+    </header>
+
+    <section id="about" class="py-20 px-6 md:px-20 max-w-6xl mx-auto">
+        <div class="flex flex-col md:flex-row items-center gap-12">
+            <div class="w-full md:w-1/2">
+                <h2 class="text-3xl md:text-4xl font-bold mb-6 text-gray-900 border-b-4 border-blue-500 inline-block pb-2">How I Got Here</h2>
+                <p class="text-lg text-gray-600 leading-relaxed mb-4">
+                    My passion for aviation began at a young age, staring up at the sky and wondering what it would be like to navigate the clouds. I started my journey at the local flight school, earning my Private Pilot License before I even graduated from college.
+                </p>
+                <p class="text-lg text-gray-600 leading-relaxed">
+                    Through rigorous training, thousands of hours in the simulator, and navigating diverse weather patterns across the globe, I earned my commercial wings. Today, I am proud to hold an Airline Transport Pilot (ATP) certificate, prioritizing safety, precision, and passenger comfort on every flight.
+                </p>
+            </div>
+            <div class="w-full md:w-1/2 bg-white p-8 rounded-2xl shadow-xl">
+                <h3 class="text-2xl font-semibold mb-4 text-gray-800">Quick Stats</h3>
+                <ul class="space-y-4">
+                    <li class="flex items-center text-gray-600 text-lg">
+                        <i class="fa-solid fa-clock text-blue-500 w-8 text-xl"></i> 
+                        <span class="font-bold mr-2">8,500+</span> Total Flight Hours
+                    </li>
+                    <li class="flex items-center text-gray-600 text-lg">
+                        <i class="fa-solid fa-plane-departure text-blue-500 w-8 text-xl"></i> 
+                        <span class="font-bold mr-2">12</span> Years of Experience
+                    </li>
+                    <li class="flex items-center text-gray-600 text-lg">
+                        <i class="fa-solid fa-globe text-blue-500 w-8 text-xl"></i> 
+                        <span class="font-bold mr-2">40+</span> Countries Visited
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section id="accomplishments" class="py-20 bg-gray-900 text-white">
+        <div class="max-w-6xl mx-auto px-6">
+            <h2 class="text-3xl md:text-4xl font-bold mb-12 text-center">Career Accomplishments</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-gray-800 p-8 rounded-xl border border-gray-700 hover:border-blue-500 transition duration-300">
+                    <i class="fa-solid fa-plane text-4xl text-blue-400 mb-4"></i>
+                    <h3 class="text-xl font-bold mb-2">Type Ratings</h3>
+                    <p class="text-gray-400">Certified to command Boeing 737NG, Airbus A320, and Embraer E175 aircraft with zero safety infractions.</p>
+                </div>
+                <div class="bg-gray-800 p-8 rounded-xl border border-gray-700 hover:border-blue-500 transition duration-300">
+                    <i class="fa-solid fa-award text-4xl text-blue-400 mb-4"></i>
+                    <h3 class="text-xl font-bold mb-2">Aviation Awards</h3>
+                    <p class="text-gray-400">Recipient of the 'Captain's Safety Excellence Award' for superior emergency response procedures.</p>
+                </div>
+                <div class="bg-gray-800 p-8 rounded-xl border border-gray-700 hover:border-blue-500 transition duration-300">
+                    <i class="fa-solid fa-chalkboard-user text-4xl text-blue-400 mb-4"></i>
+                    <h3 class="text-xl font-bold mb-2">Chief Instructor</h3>
+                    <p class="text-gray-400">Mentored over 50 aspiring aviators as a Certified Flight Instructor Instrument (CFII) and Multi-Engine Instructor (MEI).</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="py-20 bg-white">
+        <div class="max-w-4xl mx-auto px-6 text-center">
+            <h2 class="text-3xl md:text-4xl font-bold mb-6 text-gray-900">Ready for Takeoff?</h2>
+            <p class="text-lg text-gray-600 mb-10">Whether you are looking for consultation, speaking engagements, or professional inquiries, feel free to reach out.</p>
+            
+            <div class="flex flex-col md:flex-row justify-center items-center gap-8">
+                <a href="mailto:pilot@example.com" class="flex items-center text-xl text-gray-800 hover:text-blue-600 transition">
+                    <i class="fa-solid fa-envelope text-blue-500 mr-3 text-2xl"></i> pilot@example.com
+                </a>
+                <a href="tel:+1234567890" class="flex items-center text-xl text-gray-800 hover:text-blue-600 transition">
+                    <i class="fa-solid fa-phone text-blue-500 mr-3 text-2xl"></i> (555) 123-4567
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-gray-900 text-gray-500 py-6 text-center border-t border-gray-800">
+        <p>&copy; 2026 Captain John Doe. All Rights Reserved.</p>
+    </footer>
+
+</body>
+</html>
