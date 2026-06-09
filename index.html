@@ -1,132 +1,356 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Captain's Portfolio | Commercial Pilot</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <title>Santos Marquez Cuevas | Experience Beyond Boundaries</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap');
-        body { 
-            font-family: 'Inter', sans-serif; 
+        /* --- CSS VARIABLES & THEMING --- */
+        :root {
+            --bg-color: #050508;
+            --text-primary: #ffffff;
+            --text-secondary: rgba(255, 255, 255, 0.6);
+            --glass-bg: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.08);
+            --accent-glow: rgba(100, 255, 218, 0.15);
+            --nav-bg: rgba(5, 5, 8, 0.5);
         }
-        .hero-bg {
-            background: linear-gradient(rgba(15, 23, 42, 0.85), rgba(15, 23, 42, 0.95)), 
-                        url('https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=1920&q=80') center/cover;
+
+        [data-theme="light"] {
+            --bg-color: #f0f2f5;
+            --text-primary: #1a1a1a;
+            --text-secondary: rgba(0, 0, 0, 0.6);
+            --glass-bg: rgba(255, 255, 255, 0.7);
+            --glass-border: rgba(0, 0, 0, 0.1);
+            --accent-glow: rgba(0, 120, 255, 0.15);
+            --nav-bg: rgba(240, 242, 245, 0.8);
         }
-        
-        /* Custom Slide-Down Animation */
-        @keyframes slideDown {
-            0% { 
-                opacity: 0; 
-                transform: translateY(-40px); 
-            }
-            100% { 
-                opacity: 1; 
-                transform: translateY(0); 
-            }
+
+        /* --- GLOBAL RESET --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+            transition: background-color 0.4s ease, color 0.4s ease;
         }
-        .animate-slide-down {
-            animation: slideDown 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* --- BACKGROUND WITH OVERLAY --- */
+        .background-wrapper {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -1;
+            /* Uses a high-quality Unsplash aviation image as a placeholder */
+            background-image: url('https://images.unsplash.com/photo-1436491865332-7a61a109cc05?q=80&w=2074&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .background-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, var(--bg-color) 0%, transparent 40%, var(--bg-color) 100%);
+            opacity: 0.9;
+        }
+
+        /* --- NAVIGATION --- */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 1.5rem 5%;
+            display: flex;
+            justify-content: center;
+            z-index: 100;
+            transition: all 0.3s ease;
+        }
+
+        header.scrolled {
+            background: var(--nav-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            padding: 1rem 5%;
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            max-width: 1200px;
+        }
+
+        .logo {
+            font-weight: 800;
+            font-size: 1.2rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+        }
+
+        .nav-links a {
+            color: var(--text-primary);
+            text-decoration: none;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            opacity: 0.7;
+        }
+
+        .nav-links a:hover {
+            opacity: 1;
+        }
+
+        /* Theme Toggle Switch */
+        .theme-switch {
+            position: relative;
+            display: inline-block;
+            width: 50px;
+            height: 24px;
+        }
+        .theme-switch input { opacity: 0; width: 0; height: 0; }
+        .slider {
+            position: absolute; cursor: pointer;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-color: rgba(255,255,255,0.2);
+            transition: .4s; border-radius: 34px;
+            border: 1px solid var(--glass-border);
+        }
+        .slider:before {
+            position: absolute; content: "";
+            height: 16px; width: 16px; left: 4px; bottom: 3px;
+            background-color: var(--text-primary);
+            transition: .4s; border-radius: 50%;
+        }
+        input:checked + .slider { background-color: var(--accent-glow); }
+        input:checked + .slider:before { transform: translateX(24px); }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 8rem 2rem 4rem;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: clamp(2.5rem, 6vw, 5rem);
+            font-weight: 800;
+            line-height: 1.1;
+            letter-spacing: -2px;
+            margin-bottom: 1rem;
+            max-width: 1000px;
+            text-transform: uppercase;
+        }
+
+        .subtitle {
+            font-size: clamp(1rem, 2vw, 1.5rem);
+            color: var(--text-secondary);
+            font-weight: 300;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            margin-bottom: 5rem;
+        }
+
+        /* --- BENTO GRID SERVICES --- */
+        .services-header {
+            font-size: 0.9rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+        }
+
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            width: 100%;
+            max-width: 1200px;
+        }
+
+        /* Glassmorphism Styling */
+        .card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 2.5rem 2rem;
+            text-align: left;
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle at top right, var(--accent-glow), transparent 60%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .card:hover::before { opacity: 1; }
+
+        /* Card Content */
+        .icon {
+            width: 50px; height: 50px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 12px;
+            display: flex; justify-content: center; align-items: center;
+            margin-bottom: 1.5rem; border: 1px solid var(--glass-border);
+        }
+
+        .card h3 {
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-bottom: 0.8rem;
+            position: relative;
+        }
+
+        .card p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+
+        .card-link {
+            color: var(--text-primary);
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            position: relative;
+        }
+
+        /* SVG Icons Inline */
+        svg { width: 24px; height: 24px; stroke: var(--text-primary); fill: none; stroke-width: 1.5; }
+
+        /* Mobile Adjustments */
+        @media (max-width: 768px) {
+            .nav-links { display: none; } /* Hide links on small screens for minimal look */
+            .bento-grid { grid-template-columns: 1fr; padding: 0 1rem; }
         }
     </style>
 </head>
-<body class="bg-gray-50 text-gray-800">
+<body>
 
-    <header class="hero-bg text-white min-h-screen flex flex-col justify-center items-center px-6 text-center">
-        
-        <div class="animate-slide-down flex flex-col items-center">
-            
-            <img src="https://via.placeholder.com/200" alt="Pilot Profile Picture" 
-                 class="w-48 h-48 rounded-full border-4 border-blue-500 shadow-2xl object-cover mb-8 
-                        transition-transform duration-300 ease-out 
-                        hover:scale-110 active:scale-100 cursor-pointer">
-            
-            <h1 class="text-5xl md:text-7xl font-extrabold tracking-tight mb-4">Captain John Doe</h1>
-            <p class="text-xl md:text-2xl font-light text-gray-300 mb-8 tracking-wide uppercase">Commercial Airline Pilot</p>
-            
-            <div class="flex space-x-4">
-                <a href="#about" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-8 rounded-full transition duration-300 shadow-lg">The Journey</a>
-                <a href="#contact" class="bg-transparent border border-gray-400 hover:border-white text-white font-semibold py-3 px-8 rounded-full transition duration-300">Contact</a>
-            </div>
+    <div class="background-wrapper"></div>
+    <div class="background-overlay"></div>
+
+    <header id="navbar">
+        <div class="nav-container">
+            <div class="logo">SMC.</div>
+            <nav class="nav-links">
+                <a href="#home">Home</a>
+                <a href="#services">Architecture</a>
+                <a href="#projects">Operations</a>
+                <a href="#contact">Communicate</a>
+            </nav>
+            <label class="theme-switch" title="Toggle Theme">
+                <input type="checkbox" id="theme-toggle">
+                <span class="slider"></span>
+            </label>
         </div>
     </header>
 
-    <section id="about" class="py-20 px-6 md:px-20 max-w-6xl mx-auto">
-        <div class="flex flex-col md:flex-row items-center gap-12">
-            <div class="w-full md:w-1/2">
-                <h2 class="text-3xl md:text-4xl font-bold mb-6 text-gray-900 border-b-4 border-blue-500 inline-block pb-2">How I Got Here</h2>
-                <p class="text-lg text-gray-600 leading-relaxed mb-4">
-                    My passion for aviation began at a young age, staring up at the sky and wondering what it would be like to navigate the clouds. I started my journey at the local flight school, earning my Private Pilot License before I even graduated from college.
-                </p>
-                <p class="text-lg text-gray-600 leading-relaxed">
-                    Through rigorous training, thousands of hours in the simulator, and navigating diverse weather patterns across the globe, I earned my commercial wings. Today, I am proud to hold an Airline Transport Pilot (ATP) certificate, prioritizing safety, precision, and passenger comfort on every flight.
-                </p>
-            </div>
-            <div class="w-full md:w-1/2 bg-white p-8 rounded-2xl shadow-xl">
-                <h3 class="text-2xl font-semibold mb-4 text-gray-800">Quick Stats</h3>
-                <ul class="space-y-4">
-                    <li class="flex items-center text-gray-600 text-lg">
-                        <i class="fa-solid fa-clock text-blue-500 w-8 text-xl"></i> 
-                        <span class="font-bold mr-2">8,500+</span> Total Flight Hours
-                    </li>
-                    <li class="flex items-center text-gray-600 text-lg">
-                        <i class="fa-solid fa-plane-departure text-blue-500 w-8 text-xl"></i> 
-                        <span class="font-bold mr-2">12</span> Years of Experience
-                    </li>
-                    <li class="flex items-center text-gray-600 text-lg">
-                        <i class="fa-solid fa-globe text-blue-500 w-8 text-xl"></i> 
-                        <span class="font-bold mr-2">40+</span> Countries Visited
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </section>
+    <main class="hero" id="home">
+        <h1>PILOT. ENGINEER. DEVELOPER.</h1>
+        <p class="subtitle">Experience Beyond Boundaries.</p>
 
-    <section id="accomplishments" class="py-20 bg-gray-900 text-white">
-        <div class="max-w-6xl mx-auto px-6">
-            <h2 class="text-3xl md:text-4xl font-bold mb-12 text-center">Career Accomplishments</h2>
-            
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div class="bg-gray-800 p-8 rounded-xl border border-gray-700 hover:border-blue-500 transition duration-300">
-                    <i class="fa-solid fa-plane text-4xl text-blue-400 mb-4"></i>
-                    <h3 class="text-xl font-bold mb-2">Type Ratings</h3>
-                    <p class="text-gray-400">Certified to command Boeing 737NG, Airbus A320, and Embraer E175 aircraft with zero safety infractions.</p>
+        <h2 class="services-header" id="services">Core Competencies</h2>
+        
+        <section class="bento-grid">
+            <div class="card">
+                <div class="icon">
+                    <svg viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M11.42 15.17L17.25 21A2.652 2.652 0 0021 17.25l-5.877-5.877M11.42 15.17l2.496-3.03c.317-.384.74-.626 1.208-.766M11.42 15.17l-4.655 5.653a2.548 2.548 0 11-3.586-3.586l6.837-5.63m5.108-.233c.55-.164 1.163-.188 1.743-.14a4.5 4.5 0 004.486-6.336l-3.276 3.277a3.004 3.004 0 01-2.25-2.25l3.276-3.276a4.5 4.5 0 00-6.336 4.486c.091 1.076-.071 2.264-.904 2.95l-.102.085m-1.745 1.437L5.909 7.5H4.5L2.25 3.75l1.5-1.5L7.5 4.5v1.409l4.26 4.26m-1.745 1.437l1.745-1.437m6.615 8.206L15.75 15.75M4.867 19.125h.008v.008h-.008v-.008z" /></svg>
                 </div>
-                <div class="bg-gray-800 p-8 rounded-xl border border-gray-700 hover:border-blue-500 transition duration-300">
-                    <i class="fa-solid fa-award text-4xl text-blue-400 mb-4"></i>
-                    <h3 class="text-xl font-bold mb-2">Aviation Awards</h3>
-                    <p class="text-gray-400">Recipient of the 'Captain's Safety Excellence Award' for superior emergency response procedures.</p>
-                </div>
-                <div class="bg-gray-800 p-8 rounded-xl border border-gray-700 hover:border-blue-500 transition duration-300">
-                    <i class="fa-solid fa-chalkboard-user text-4xl text-blue-400 mb-4"></i>
-                    <h3 class="text-xl font-bold mb-2">Chief Instructor</h3>
-                    <p class="text-gray-400">Mentored over 50 aspiring aviators as a Certified Flight Instructor Instrument (CFII) and Multi-Engine Instructor (MEI).</p>
-                </div>
+                <h3>Mobile Diagnostics</h3>
+                <p>Advanced automotive troubleshooting, utilizing MAP sensor data and precision tools for rapid, on-site resolution.</p>
+                <a href="#" class="card-link">View Hardware Logs <span>→</span></a>
             </div>
-        </div>
-    </section>
 
-    <section id="contact" class="py-20 bg-white">
-        <div class="max-w-4xl mx-auto px-6 text-center">
-            <h2 class="text-3xl md:text-4xl font-bold mb-6 text-gray-900">Ready for Takeoff?</h2>
-            <p class="text-lg text-gray-600 mb-10">Whether you are looking for consultation, speaking engagements, or professional inquiries, feel free to reach out.</p>
-            
-            <div class="flex flex-col md:flex-row justify-center items-center gap-8">
-                <a href="mailto:pilot@example.com" class="flex items-center text-xl text-gray-800 hover:text-blue-600 transition">
-                    <i class="fa-solid fa-envelope text-blue-500 mr-3 text-2xl"></i> pilot@example.com
-                </a>
-                <a href="tel:+1234567890" class="flex items-center text-xl text-gray-800 hover:text-blue-600 transition">
-                    <i class="fa-solid fa-phone text-blue-500 mr-3 text-2xl"></i> (555) 123-4567
-                </a>
+            <div class="card">
+                <div class="icon">
+                    <svg viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5.25 14.25h13.5m-13.5 0a3 3 0 01-3-3m3 3a3 3 0 100 6h13.5a3 3 0 100-6m-16.5-3a3 3 0 013-3h13.5a3 3 0 013 3m-19.5 0a4.5 4.5 0 01.9-2.7L5.737 5.1a3.375 3.375 0 012.7-1.35h7.126c1.062 0 2.062.5 2.7 1.35l2.587 3.45a4.5 4.5 0 01.9 2.7m0 0a3 3 0 01-3 3m0 3h.008v.008h-.008v-.008zm0-6h.008v.008h-.008v-.008zm-3 6h.008v.008h-.008v-.008zm-3 6h.008v.008h-.008v-.008z" /></svg>
+                </div>
+                <h3>Digital Infrastructure</h3>
+                <p>Architecting and deploying robust Linux, Docker, and dedicated hosting environments for uninterrupted operations.</p>
+                <a href="#" class="card-link">Check Server Status <span>→</span></a>
             </div>
-        </div>
-    </section>
 
-    <footer class="bg-gray-900 text-gray-500 py-6 text-center border-t border-gray-800">
-        <p>&copy; 2026 Captain John Doe. All Rights Reserved.</p>
-    </footer>
+            <div class="card">
+                <div class="icon">
+                    <svg viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17.25 6.75L22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3l-4.5 16.5" /></svg>
+                </div>
+                <h3>Web Engineering</h3>
+                <p>Developing high-performance, modular interfaces using React and modern CSS to bridge physical and digital services.</p>
+                <a href="#" class="card-link">View Source Code <span>→</span></a>
+            </div>
+        </section>
+    </main>
 
+    <script>
+        // 1. Navigation Blur Effect on Scroll
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // 2. Light/Dark Mode Toggle
+        const themeToggle = document.getElementById('theme-toggle');
+        const rootElement = document.documentElement;
+
+        themeToggle.addEventListener('change', (e) => {
+            if (e.target.checked) {
+                rootElement.setAttribute('data-theme', 'light');
+            } else {
+                rootElement.removeAttribute('data-theme');
+            }
+        });
+    </script>
 </body>
 </html>
