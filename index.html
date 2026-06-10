@@ -9,25 +9,15 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
     
     <style>
-        /* --- CSS VARIABLES & THEMING --- */
+        /* --- CSS VARIABLES (Light Mode Locked) --- */
         :root {
-            --bg-color: #050508;
-            --text-primary: #ffffff;
-            --text-secondary: rgba(255, 255, 255, 0.6);
-            --glass-bg: rgba(255, 255, 255, 0.03);
-            --glass-border: rgba(255, 255, 255, 0.08);
-            --accent-glow: rgba(100, 255, 218, 0.15);
-            --nav-bg: rgba(5, 5, 8, 0.5);
-        }
-
-        [data-theme="light"] {
             --bg-color: #f0f2f5;
             --text-primary: #1a1a1a;
-            --text-secondary: rgba(0, 0, 0, 0.6);
-            --glass-bg: rgba(255, 255, 255, 0.7);
+            --text-secondary: rgba(0, 0, 0, 0.65);
+            --glass-bg: rgba(255, 255, 255, 0.75);
             --glass-border: rgba(0, 0, 0, 0.1);
             --accent-glow: rgba(0, 120, 255, 0.15);
-            --nav-bg: rgba(240, 242, 245, 0.8);
+            --nav-bg: rgba(240, 242, 245, 0.85);
         }
 
         /* --- GLOBAL RESET --- */
@@ -36,7 +26,6 @@
             padding: 0;
             box-sizing: border-box;
             font-family: 'Inter', sans-serif;
-            transition: background-color 0.4s ease, color 0.4s ease;
         }
 
         body {
@@ -53,21 +42,20 @@
             left: 0;
             width: 100vw;
             height: 100vh;
-            z-index: -1;
-            /* Uses a high-quality Unsplash aviation image as a placeholder */
+            z-index: -2; /* Deepest layer */
             background-image: url('https://images.unsplash.com/photo-1436491865332-7a61a109cc05?q=80&w=2074&auto=format&fit=crop');
             background-size: cover;
             background-position: center;
         }
 
         .background-overlay {
-            position: absolute;
+            position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(to bottom, var(--bg-color) 0%, transparent 40%, var(--bg-color) 100%);
-            opacity: 0.9;
+            z-index: -1; /* Above image, below content */
+            background: linear-gradient(to bottom, rgba(240, 242, 245, 0.9) 0%, rgba(240, 242, 245, 0.4) 50%, rgba(240, 242, 245, 0.95) 100%);
         }
 
         /* --- NAVIGATION --- */
@@ -103,6 +91,7 @@
             font-size: 1.2rem;
             letter-spacing: 2px;
             text-transform: uppercase;
+            color: var(--text-primary);
         }
 
         .nav-links {
@@ -116,39 +105,19 @@
             font-size: 0.85rem;
             text-transform: uppercase;
             letter-spacing: 1px;
+            font-weight: 600;
             opacity: 0.7;
+            transition: opacity 0.2s ease;
         }
 
         .nav-links a:hover {
             opacity: 1;
         }
 
-        /* Theme Toggle Switch */
-        .theme-switch {
-            position: relative;
-            display: inline-block;
-            width: 50px;
-            height: 24px;
-        }
-        .theme-switch input { opacity: 0; width: 0; height: 0; }
-        .slider {
-            position: absolute; cursor: pointer;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background-color: rgba(255,255,255,0.2);
-            transition: .4s; border-radius: 34px;
-            border: 1px solid var(--glass-border);
-        }
-        .slider:before {
-            position: absolute; content: "";
-            height: 16px; width: 16px; left: 4px; bottom: 3px;
-            background-color: var(--text-primary);
-            transition: .4s; border-radius: 50%;
-        }
-        input:checked + .slider { background-color: var(--accent-glow); }
-        input:checked + .slider:before { transform: translateX(24px); }
-
         /* --- HERO SECTION --- */
         .hero {
+            position: relative;
+            z-index: 1; /* Forces text explicitly on top of background blurs */
             min-height: 100vh;
             display: flex;
             flex-direction: column;
@@ -166,12 +135,13 @@
             margin-bottom: 1rem;
             max-width: 1000px;
             text-transform: uppercase;
+            color: var(--text-primary);
         }
 
         .subtitle {
             font-size: clamp(1rem, 2vw, 1.5rem);
             color: var(--text-secondary);
-            font-weight: 300;
+            font-weight: 600;
             letter-spacing: 4px;
             text-transform: uppercase;
             margin-bottom: 5rem;
@@ -184,6 +154,7 @@
             text-transform: uppercase;
             color: var(--text-secondary);
             margin-bottom: 2rem;
+            font-weight: 600;
         }
 
         .bento-grid {
@@ -196,6 +167,8 @@
 
         /* Glassmorphism Styling */
         .card {
+            position: relative;
+            z-index: 1; /* Foundation layer for the card */
             background: var(--glass-bg);
             backdrop-filter: blur(16px);
             -webkit-backdrop-filter: blur(16px);
@@ -204,41 +177,48 @@
             padding: 2.5rem 2rem;
             text-align: left;
             transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease;
-            position: relative;
             overflow: hidden;
         }
 
+        /* The glowing gradient hover effect pushed BEHIND the text */
         .card::before {
             content: '';
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: radial-gradient(circle at top right, var(--accent-glow), transparent 60%);
+            background: radial-gradient(circle at top right, var(--accent-glow), transparent 70%);
             opacity: 0;
             transition: opacity 0.4s ease;
+            z-index: -1; 
         }
 
         .card:hover {
             transform: translateY(-8px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
-            border-color: rgba(255, 255, 255, 0.2);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.08);
+            border-color: rgba(0, 0, 0, 0.15);
         }
 
         .card:hover::before { opacity: 1; }
 
-        /* Card Content */
+        /* Card Content Layering */
+        .icon, .card h3, .card p, .card-link {
+            position: relative;
+            z-index: 2; /* Ensures text stays fully sharp above the card's blur/glow */
+        }
+
         .icon {
             width: 50px; height: 50px;
-            background: rgba(255,255,255,0.05);
+            background: rgba(0,0,0,0.03);
             border-radius: 12px;
             display: flex; justify-content: center; align-items: center;
-            margin-bottom: 1.5rem; border: 1px solid var(--glass-border);
+            margin-bottom: 1.5rem; 
+            border: 1px solid var(--glass-border);
         }
 
         .card h3 {
             font-size: 1.4rem;
-            font-weight: 600;
+            font-weight: 700;
             margin-bottom: 0.8rem;
-            position: relative;
+            color: var(--text-primary);
         }
 
         .card p {
@@ -246,29 +226,32 @@
             font-size: 0.95rem;
             line-height: 1.6;
             margin-bottom: 1.5rem;
-            position: relative;
+            font-weight: 400;
         }
 
         .card-link {
             color: var(--text-primary);
             text-decoration: none;
             font-size: 0.85rem;
-            font-weight: 600;
+            font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 1px;
             display: flex;
             align-items: center;
             gap: 8px;
-            position: relative;
         }
 
         /* SVG Icons Inline */
-        svg { width: 24px; height: 24px; stroke: var(--text-primary); fill: none; stroke-width: 1.5; }
+        svg { width: 24px; height: 24px; stroke: var(--text-primary); fill: none; stroke-width: 2; }
 
         /* Mobile Adjustments */
         @media (max-width: 768px) {
-            .nav-links { display: none; } /* Hide links on small screens for minimal look */
+            .nav-links { display: none; }
             .bento-grid { grid-template-columns: 1fr; padding: 0 1rem; }
+            .background-overlay {
+                /* Slightly stronger overlay on mobile to guarantee readability */
+                background: linear-gradient(to bottom, rgba(240, 242, 245, 0.95) 0%, rgba(240, 242, 245, 0.7) 50%, rgba(240, 242, 245, 1) 100%);
+            }
         }
     </style>
 </head>
@@ -286,10 +269,6 @@
                 <a href="#projects">Operations</a>
                 <a href="#contact">Communicate</a>
             </nav>
-            <label class="theme-switch" title="Toggle Theme">
-                <input type="checkbox" id="theme-toggle">
-                <span class="slider"></span>
-            </label>
         </div>
     </header>
 
@@ -330,25 +309,13 @@
     </main>
 
     <script>
-        // 1. Navigation Blur Effect on Scroll
+        // Navigation Blur Effect on Scroll
         const navbar = document.getElementById('navbar');
         window.addEventListener('scroll', () => {
             if (window.scrollY > 50) {
                 navbar.classList.add('scrolled');
             } else {
                 navbar.classList.remove('scrolled');
-            }
-        });
-
-        // 2. Light/Dark Mode Toggle
-        const themeToggle = document.getElementById('theme-toggle');
-        const rootElement = document.documentElement;
-
-        themeToggle.addEventListener('change', (e) => {
-            if (e.target.checked) {
-                rootElement.setAttribute('data-theme', 'light');
-            } else {
-                rootElement.removeAttribute('data-theme');
             }
         });
     </script>
