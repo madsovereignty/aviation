@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Santos Marquez Cuevas | Pilot in Command</title>
+    <title>Ivan Navarro | Pilot in Command</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
@@ -12,11 +12,11 @@
         /* --- CSS VARIABLES (Light Mode Locked - Premium Aviation) --- */
         :root {
             --bg-color: #f4f6f9;
-            --text-primary: #0a1128; /* Deep aviation navy for high contrast */
+            --text-primary: #0a1128; 
             --text-secondary: rgba(10, 17, 40, 0.65);
             --glass-bg: rgba(255, 255, 255, 0.85);
             --glass-border: rgba(10, 17, 40, 0.08);
-            --accent-glow: rgba(0, 80, 200, 0.12); /* Subtle airline blue glow */
+            --accent-glow: rgba(0, 80, 200, 0.12); 
             --nav-bg: rgba(244, 246, 249, 0.9);
         }
 
@@ -43,7 +43,6 @@
             width: 100vw;
             height: 100vh;
             z-index: -2; 
-            /* High-altitude cloud/sky image */
             background-image: url('https://images.unsplash.com/photo-1540962351504-03099e0a754b?q=80&w=2070&auto=format&fit=crop');
             background-size: cover;
             background-position: center 30%;
@@ -56,7 +55,6 @@
             width: 100%;
             height: 100%;
             z-index: -1; 
-            /* Bright, clean gradient to ensure text readability */
             background: linear-gradient(to bottom, rgba(244, 246, 249, 0.95) 0%, rgba(244, 246, 249, 0.3) 40%, rgba(244, 246, 249, 0.95) 100%);
         }
 
@@ -192,7 +190,6 @@
             overflow: hidden;
         }
 
-        /* Subtle airline-blue glow behind text on hover */
         .card::before {
             content: '';
             position: absolute;
@@ -255,10 +252,8 @@
             gap: 8px;
         }
 
-        /* SVG Icons Inline */
         svg { width: 24px; height: 24px; stroke: #0044aa; fill: none; stroke-width: 2; }
 
-        /* Mobile Adjustments */
         @media (max-width: 768px) {
             .nav-links { display: none; }
             .bento-grid { grid-template-columns: 1fr; padding: 0 1rem; }
@@ -275,7 +270,7 @@
 
     <header id="navbar">
         <div class="nav-container">
-            <div class="logo">SMC.</div>
+            <div class="logo">IN.</div>
             <nav class="nav-links">
                 <a href="#dossier">Dossier</a>
                 <a href="#flight-ops">Flight Ops</a>
@@ -286,8 +281,8 @@
     </header>
 
     <main class="hero" id="home">
-        <span class="pre-title">Captain Santos Marquez Cuevas</span>
-        <h1>CHIEF IN COMMAND.<br>COMMERCIAL AVIATION.</h1>
+        <span class="pre-title">Captain Ivan Navarro</span>
+        <h1>PILOT IN COMMAND.<br>COMMERCIAL AVIATION.</h1>
         <p class="subtitle">Precision. Leadership. Global Operations.</p>
 
         <h2 class="services-header" id="flight-ops">Command Competencies</h2>
@@ -323,7 +318,6 @@
     </main>
 
     <script>
-        // Navigation Blur Effect on Scroll
         const navbar = document.getElementById('navbar');
         window.addEventListener('scroll', () => {
             if (window.scrollY > 50) {
