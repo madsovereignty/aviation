@@ -3,21 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Santos Marquez Cuevas | Experience Beyond Boundaries</title>
+    <title>Santos Marquez Cuevas | Chief in Command</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
     
     <style>
-        /* --- CSS VARIABLES (Light Mode Locked) --- */
+        /* --- CSS VARIABLES (Light Mode Locked - Premium Aviation) --- */
         :root {
-            --bg-color: #f0f2f5;
-            --text-primary: #1a1a1a;
-            --text-secondary: rgba(0, 0, 0, 0.65);
-            --glass-bg: rgba(255, 255, 255, 0.75);
-            --glass-border: rgba(0, 0, 0, 0.1);
-            --accent-glow: rgba(0, 120, 255, 0.15);
-            --nav-bg: rgba(240, 242, 245, 0.85);
+            --bg-color: #f4f6f9;
+            --text-primary: #0a1128; /* Deep aviation navy for high contrast */
+            --text-secondary: rgba(10, 17, 40, 0.65);
+            --glass-bg: rgba(255, 255, 255, 0.85);
+            --glass-border: rgba(10, 17, 40, 0.08);
+            --accent-glow: rgba(0, 80, 200, 0.12); /* Subtle airline blue glow */
+            --nav-bg: rgba(244, 246, 249, 0.9);
         }
 
         /* --- GLOBAL RESET --- */
@@ -35,17 +35,18 @@
             -webkit-font-smoothing: antialiased;
         }
 
-        /* --- BACKGROUND WITH OVERLAY --- */
+        /* --- BACKGROUND WITH OVERLAY (Bright Sky/Cockpit Vibe) --- */
         .background-wrapper {
             position: fixed;
             top: 0;
             left: 0;
             width: 100vw;
             height: 100vh;
-            z-index: -2; /* Deepest layer */
-            background-image: url('https://images.unsplash.com/photo-1436491865332-7a61a109cc05?q=80&w=2074&auto=format&fit=crop');
+            z-index: -2; 
+            /* High-altitude cloud/sky image */
+            background-image: url('https://images.unsplash.com/photo-1540962351504-03099e0a754b?q=80&w=2070&auto=format&fit=crop');
             background-size: cover;
-            background-position: center;
+            background-position: center 30%;
         }
 
         .background-overlay {
@@ -54,8 +55,9 @@
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: -1; /* Above image, below content */
-            background: linear-gradient(to bottom, rgba(240, 242, 245, 0.9) 0%, rgba(240, 242, 245, 0.4) 50%, rgba(240, 242, 245, 0.95) 100%);
+            z-index: -1; 
+            /* Bright, clean gradient to ensure text readability */
+            background: linear-gradient(to bottom, rgba(244, 246, 249, 0.95) 0%, rgba(244, 246, 249, 0.3) 40%, rgba(244, 246, 249, 0.95) 100%);
         }
 
         /* --- NAVIGATION --- */
@@ -72,10 +74,11 @@
 
         header.scrolled {
             background: var(--nav-bg);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
             padding: 1rem 5%;
             border-bottom: 1px solid var(--glass-border);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
         }
 
         .nav-container {
@@ -105,8 +108,8 @@
             font-size: 0.85rem;
             text-transform: uppercase;
             letter-spacing: 1px;
-            font-weight: 600;
-            opacity: 0.7;
+            font-weight: 700;
+            opacity: 0.6;
             transition: opacity 0.2s ease;
         }
 
@@ -117,7 +120,7 @@
         /* --- HERO SECTION --- */
         .hero {
             position: relative;
-            z-index: 1; /* Forces text explicitly on top of background blurs */
+            z-index: 1; 
             min-height: 100vh;
             display: flex;
             flex-direction: column;
@@ -127,22 +130,31 @@
             text-align: center;
         }
 
+        .pre-title {
+            font-size: 0.9rem;
+            font-weight: 700;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+        }
+
         h1 {
-            font-size: clamp(2.5rem, 6vw, 5rem);
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
             font-weight: 800;
             line-height: 1.1;
-            letter-spacing: -2px;
-            margin-bottom: 1rem;
+            letter-spacing: -1px;
+            margin-bottom: 1.5rem;
             max-width: 1000px;
             text-transform: uppercase;
             color: var(--text-primary);
         }
 
         .subtitle {
-            font-size: clamp(1rem, 2vw, 1.5rem);
+            font-size: clamp(1rem, 2vw, 1.2rem);
             color: var(--text-secondary);
             font-weight: 600;
-            letter-spacing: 4px;
+            letter-spacing: 2px;
             text-transform: uppercase;
             margin-bottom: 5rem;
         }
@@ -154,7 +166,7 @@
             text-transform: uppercase;
             color: var(--text-secondary);
             margin-bottom: 2rem;
-            font-weight: 600;
+            font-weight: 700;
         }
 
         .bento-grid {
@@ -168,19 +180,19 @@
         /* Glassmorphism Styling */
         .card {
             position: relative;
-            z-index: 1; /* Foundation layer for the card */
+            z-index: 1; 
             background: var(--glass-bg);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
             border: 1px solid var(--glass-border);
-            border-radius: 24px;
+            border-radius: 20px;
             padding: 2.5rem 2rem;
             text-align: left;
             transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease;
             overflow: hidden;
         }
 
-        /* The glowing gradient hover effect pushed BEHIND the text */
+        /* Subtle airline-blue glow behind text on hover */
         .card::before {
             content: '';
             position: absolute;
@@ -192,9 +204,9 @@
         }
 
         .card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 15px 35px rgba(0,0,0,0.08);
-            border-color: rgba(0, 0, 0, 0.15);
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.06);
+            border-color: rgba(0, 80, 200, 0.2);
         }
 
         .card:hover::before { opacity: 1; }
@@ -202,23 +214,25 @@
         /* Card Content Layering */
         .icon, .card h3, .card p, .card-link {
             position: relative;
-            z-index: 2; /* Ensures text stays fully sharp above the card's blur/glow */
+            z-index: 2; 
         }
 
         .icon {
             width: 50px; height: 50px;
-            background: rgba(0,0,0,0.03);
+            background: rgba(0, 80, 200, 0.05);
             border-radius: 12px;
             display: flex; justify-content: center; align-items: center;
             margin-bottom: 1.5rem; 
-            border: 1px solid var(--glass-border);
+            border: 1px solid rgba(0, 80, 200, 0.1);
         }
 
         .card h3 {
             font-size: 1.4rem;
-            font-weight: 700;
+            font-weight: 800;
             margin-bottom: 0.8rem;
             color: var(--text-primary);
+            text-transform: uppercase;
+            letter-spacing: -0.5px;
         }
 
         .card p {
@@ -242,15 +256,14 @@
         }
 
         /* SVG Icons Inline */
-        svg { width: 24px; height: 24px; stroke: var(--text-primary); fill: none; stroke-width: 2; }
+        svg { width: 24px; height: 24px; stroke: #0044aa; fill: none; stroke-width: 2; }
 
         /* Mobile Adjustments */
         @media (max-width: 768px) {
             .nav-links { display: none; }
             .bento-grid { grid-template-columns: 1fr; padding: 0 1rem; }
             .background-overlay {
-                /* Slightly stronger overlay on mobile to guarantee readability */
-                background: linear-gradient(to bottom, rgba(240, 242, 245, 0.95) 0%, rgba(240, 242, 245, 0.7) 50%, rgba(240, 242, 245, 1) 100%);
+                background: linear-gradient(to bottom, rgba(244, 246, 249, 0.98) 0%, rgba(244, 246, 249, 0.8) 40%, rgba(244, 246, 249, 1) 100%);
             }
         }
     </style>
@@ -264,46 +277,47 @@
         <div class="nav-container">
             <div class="logo">SMC.</div>
             <nav class="nav-links">
-                <a href="#home">Home</a>
-                <a href="#services">Architecture</a>
-                <a href="#projects">Operations</a>
-                <a href="#contact">Communicate</a>
+                <a href="#dossier">Dossier</a>
+                <a href="#flight-ops">Flight Ops</a>
+                <a href="#certifications">Certifications</a>
+                <a href="#dispatch">Dispatch Contact</a>
             </nav>
         </div>
     </header>
 
     <main class="hero" id="home">
-        <h1>PILOT. ENGINEER. DEVELOPER.</h1>
-        <p class="subtitle">Experience Beyond Boundaries.</p>
+        <span class="pre-title">Captain Santos Marquez Cuevas</span>
+        <h1>CHIEF IN COMMAND.<br>COMMERCIAL AVIATION.</h1>
+        <p class="subtitle">Precision. Leadership. Global Operations.</p>
 
-        <h2 class="services-header" id="services">Core Competencies</h2>
+        <h2 class="services-header" id="flight-ops">Command Competencies</h2>
         
         <section class="bento-grid">
             <div class="card">
                 <div class="icon">
-                    <svg viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M11.42 15.17L17.25 21A2.652 2.652 0 0021 17.25l-5.877-5.877M11.42 15.17l2.496-3.03c.317-.384.74-.626 1.208-.766M11.42 15.17l-4.655 5.653a2.548 2.548 0 11-3.586-3.586l6.837-5.63m5.108-.233c.55-.164 1.163-.188 1.743-.14a4.5 4.5 0 004.486-6.336l-3.276 3.277a3.004 3.004 0 01-2.25-2.25l3.276-3.276a4.5 4.5 0 00-6.336 4.486c.091 1.076-.071 2.264-.904 2.95l-.102.085m-1.745 1.437L5.909 7.5H4.5L2.25 3.75l1.5-1.5L7.5 4.5v1.409l4.26 4.26m-1.745 1.437l1.745-1.437m6.615 8.206L15.75 15.75M4.867 19.125h.008v.008h-.008v-.008z" /></svg>
+                    <svg viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5" /></svg>
                 </div>
-                <h3>Mobile Diagnostics</h3>
-                <p>Advanced automotive troubleshooting, utilizing MAP sensor data and precision tools for rapid, on-site resolution.</p>
-                <a href="#" class="card-link">View Hardware Logs <span>→</span></a>
+                <h3>Flight Operations</h3>
+                <p>Extensive command experience in high-density global airspace. Executing complex flight profiles with uncompromised adherence to standard operating procedures.</p>
+                <a href="#" class="card-link">View Flight Hours <span>→</span></a>
             </div>
 
             <div class="card">
                 <div class="icon">
-                    <svg viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5.25 14.25h13.5m-13.5 0a3 3 0 01-3-3m3 3a3 3 0 100 6h13.5a3 3 0 100-6m-16.5-3a3 3 0 013-3h13.5a3 3 0 013 3m-19.5 0a4.5 4.5 0 01.9-2.7L5.737 5.1a3.375 3.375 0 012.7-1.35h7.126c1.062 0 2.062.5 2.7 1.35l2.587 3.45a4.5 4.5 0 01.9 2.7m0 0a3 3 0 01-3 3m0 3h.008v.008h-.008v-.008zm0-6h.008v.008h-.008v-.008zm-3 6h.008v.008h-.008v-.008zm-3 6h.008v.008h-.008v-.008z" /></svg>
+                    <svg viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" /></svg>
                 </div>
-                <h3>Digital Infrastructure</h3>
-                <p>Architecting and deploying robust Linux, Docker, and dedicated hosting environments for uninterrupted operations.</p>
-                <a href="#" class="card-link">Check Server Status <span>→</span></a>
+                <h3>Safety & Compliance</h3>
+                <p>Flawless safety record. Expert in aeronautical decision-making, risk mitigation, and strict compliance with international aviation regulations and FAA directives.</p>
+                <a href="#" class="card-link">View Safety Record <span>→</span></a>
             </div>
 
             <div class="card">
                 <div class="icon">
-                    <svg viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17.25 6.75L22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3l-4.5 16.5" /></svg>
+                    <svg viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 017.843 4.582M12 3a8.997 8.997 0 00-7.843 4.582m15.686 0A11.953 11.953 0 0112 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0121 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0112 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 013 12c0-1.605.42-3.113 1.157-4.418" /></svg>
                 </div>
-                <h3>Web Engineering</h3>
-                <p>Developing high-performance, modular interfaces using React and modern CSS to bridge physical and digital services.</p>
-                <a href="#" class="card-link">View Source Code <span>→</span></a>
+                <h3>Crew Resource Management</h3>
+                <p>Fostering elite cockpit communication and teamwork. Leading multi-national flight crews with a focus on operational efficiency and passenger security.</p>
+                <a href="#" class="card-link">View Certifications <span>→</span></a>
             </div>
         </section>
     </main>
