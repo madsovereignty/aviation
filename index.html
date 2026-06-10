@@ -26,6 +26,7 @@
             padding: 0;
             box-sizing: border-box;
             font-family: 'Inter', sans-serif;
+            scroll-behavior: smooth; /* Enables smooth scrolling for nav links */
         }
 
         body {
@@ -42,7 +43,7 @@
             left: 0;
             width: 100vw;
             height: 100vh;
-            background-color: var(--text-primary); /* Deep aviation navy background */
+            background-color: var(--text-primary); 
             display: flex;
             justify-content: center;
             align-items: center;
@@ -56,8 +57,8 @@
             font-weight: 800;
             letter-spacing: 8px;
             text-transform: uppercase;
-            font-family: monospace; /* Gives that terminal/system boot feel */
-            white-space: pre; /* Prevents text from shifting when spaces are introduced */
+            font-family: monospace; 
+            white-space: pre; 
         }
 
         /* --- BACKGROUND WITH OVERLAY --- */
@@ -279,12 +280,66 @@
 
         svg { width: 24px; height: 24px; stroke: #0044aa; fill: none; stroke-width: 2; }
 
+        /* --- DISPATCH CONTACT SECTION --- */
+        .dispatch-section {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 4rem 2rem 8rem;
+            width: 100%;
+        }
+
+        .contact-card {
+            max-width: 800px;
+            width: 100%;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .contact-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 3rem;
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--glass-border);
+            width: 100%;
+        }
+
+        .contact-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .contact-label {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--text-secondary);
+            font-weight: 700;
+        }
+
+        .contact-value {
+            font-size: 1.2rem;
+            font-weight: 800;
+            color: var(--text-primary);
+            letter-spacing: 0.5px;
+        }
+
         @media (max-width: 768px) {
             .nav-links { display: none; }
             .bento-grid { grid-template-columns: 1fr; padding: 0 1rem; }
             .background-overlay {
                 background: linear-gradient(to bottom, rgba(244, 246, 249, 0.98) 0%, rgba(244, 246, 249, 0.8) 40%, rgba(244, 246, 249, 1) 100%);
             }
+            .contact-grid { flex-direction: column; gap: 1.5rem; }
         }
     </style>
 </head>
@@ -301,7 +356,7 @@
         <div class="nav-container">
             <div class="logo">IN.</div>
             <nav class="nav-links">
-                <a href="#dossier">Dossier</a>
+                <a href="#home">Dossier</a>
                 <a href="#flight-ops">Flight Ops</a>
                 <a href="#certifications">Certifications</a>
                 <a href="#dispatch">Dispatch Contact</a>
@@ -336,7 +391,7 @@
             </div>
 
             <div class="card">
-                <div class="icon">
+                <div class="icon" id="certifications">
                     <svg viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 017.843 4.582M12 3a8.997 8.997 0 00-7.843 4.582m15.686 0A11.953 11.953 0 0112 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0121 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0112 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 013 12c0-1.605.42-3.113 1.157-4.418" /></svg>
                 </div>
                 <h3>Crew Resource Management</h3>
@@ -346,6 +401,25 @@
         </section>
     </main>
 
+    <section class="dispatch-section" id="dispatch">
+        <h2 class="services-header">Operational Clearance</h2>
+        <div class="card contact-card">
+            <h3>Dispatch & Communications</h3>
+            <p>For immediate flight scheduling, operational inquiries, or direct communication routing.</p>
+            
+            <div class="contact-grid">
+                <div class="contact-item">
+                    <span class="contact-label">Secure Comms Line</span>
+                    <span class="contact-value">+1 (555) 019-8372</span>
+                </div>
+                <div class="contact-item">
+                    <span class="contact-label">Clearance Email</span>
+                    <span class="contact-value">ops@navarro-command.aero</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <script>
         // --- LOADING SCREEN GLITCH EFFECT ---
         document.addEventListener("DOMContentLoaded", () => {
@@ -354,12 +428,10 @@
             const textElement = document.getElementById('glitch-text');
             const loader = document.getElementById('loader');
             
-            // Lock scrolling while loading
             document.body.style.overflow = "hidden";
             
             let iteration = 0;
             
-            // Phase 1: Glitch text in from left to right
             const glitchInInterval = setInterval(() => {
                 textElement.innerText = targetWord.split("")
                     .map((letter, index) => {
@@ -370,23 +442,18 @@
 
                 if (iteration >= targetWord.length) {
                     clearInterval(glitchInInterval);
-                    // Hold the word on screen for 1 second before reversing
                     setTimeout(startGlitchOut, 1000); 
                 }
-                iteration += 1 / 4; // Controls resolution speed
+                iteration += 1 / 4; 
             }, 40);
 
-            // Phase 2: Glitch text out from left to right
             function startGlitchOut() {
                 iteration = 0;
                 const glitchOutInterval = setInterval(() => {
                     textElement.innerText = targetWord.split("")
                         .map((letter, index) => {
-                            // If fully passed, turn to a blank space (keeps layout from collapsing)
                             if (iteration > index + 1) return "\u00A0"; 
-                            // If actively glitching
                             if (iteration > index) return chars[Math.floor(Math.random() * chars.length)];
-                            // Unaffected letter
                             return targetWord[index];
                         })
                         .join("");
@@ -394,13 +461,11 @@
                     if (iteration >= targetWord.length + 1) {
                         clearInterval(glitchOutInterval);
                         
-                        // Phase 3: Fade out the loader panel
                         loader.style.opacity = "0";
                         setTimeout(() => {
                             loader.style.display = "none";
-                            // Re-enable website scrolling
                             document.body.style.overflow = "auto"; 
-                        }, 500); // Matches the CSS transition duration
+                        }, 500); 
                     }
                     iteration += 1 / 4; 
                 }, 40);
