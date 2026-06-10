@@ -61,14 +61,14 @@
             white-space: pre; 
         }
 
-        /* --- BACKGROUND & OVERLAYS --- */
+        /* --- BACKGROUND WITH OVERLAY --- */
         .background-wrapper {
             position: fixed;
             top: 0;
             left: 0;
             width: 100vw;
             height: 100vh;
-            z-index: -3; 
+            z-index: -2; 
             background-image: url('https://images.unsplash.com/photo-1540962351504-03099e0a754b?q=80&w=2070&auto=format&fit=crop');
             background-size: cover;
             background-position: center 30%;
@@ -80,22 +80,8 @@
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: -2; 
+            z-index: -1; 
             background: linear-gradient(to bottom, rgba(244, 246, 249, 0.95) 0%, rgba(244, 246, 249, 0.3) 40%, rgba(244, 246, 249, 0.95) 100%);
-        }
-
-        /* The Dynamic Scroll Dimmer */
-        #scroll-dimmer {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1; /* Above the background, below the content */
-            background-color: var(--text-primary); /* Deep aviation navy for a rich dim effect */
-            opacity: 0; /* Starts completely invisible */
-            pointer-events: none; /* Prevents it from blocking mouse clicks */
-            transition: opacity 0.1s ease-out; /* Smooths out scroll wheel jumping */
         }
 
         /* --- NAVIGATION --- */
@@ -197,6 +183,63 @@
             margin-bottom: 5rem;
         }
 
+        /* --- ABOUT SECTION --- */
+        .about-section {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 4rem 2rem;
+            width: 100%;
+            scroll-margin-top: 80px; /* Offset for sticky nav */
+        }
+
+        .about-container {
+            display: flex;
+            max-width: 1200px;
+            width: 100%;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .profile-picture-container {
+            flex: 0 0 350px;
+            height: 350px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 1rem;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.03);
+        }
+
+        .profile-picture-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 12px;
+        }
+
+        .about-text-container {
+            flex: 1;
+        }
+
+        .about-text-container h2 {
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: -1px;
+        }
+
+        .about-text-container p {
+            color: var(--text-secondary);
+            font-size: 1.05rem;
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+            max-width: 700px;
+        }
+
         /* --- BENTO GRID SERVICES --- */
         .services-header {
             font-size: 0.9rem;
@@ -205,6 +248,16 @@
             color: var(--text-secondary);
             margin-bottom: 2rem;
             font-weight: 700;
+            text-align: center;
+            width: 100%;
+        }
+
+        .competencies-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 4rem 2rem;
+            width: 100%;
         }
 
         .bento-grid {
@@ -230,6 +283,7 @@
             overflow: hidden;
         }
 
+        /* Subtle airline-blue glow behind text on hover */
         .card::before {
             content: '';
             position: absolute;
@@ -306,7 +360,7 @@
         }
 
         .contact-card {
-            max-width: 800px;
+            max-width: 1000px;
             width: 100%;
             text-align: center;
             display: flex;
@@ -315,8 +369,8 @@
         }
 
         .contact-grid {
-            display: flex;
-            flex-wrap: wrap;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
             justify-content: center;
             gap: 3rem;
             margin-top: 2rem;
@@ -347,13 +401,18 @@
             letter-spacing: 0.5px;
         }
 
-        @media (max-width: 768px) {
+        @media (max-width: 900px) {
             .nav-links { display: none; }
+            .about-container { flex-direction: column; text-align: center; }
+            .about-text-container p { margin-left: auto; margin-right: auto; }
+            .contact-grid { grid-template-columns: 1fr; gap: 1.5rem; }
+        }
+
+        @media (max-width: 768px) {
             .bento-grid { grid-template-columns: 1fr; padding: 0 1rem; }
             .background-overlay {
                 background: linear-gradient(to bottom, rgba(244, 246, 249, 0.98) 0%, rgba(244, 246, 249, 0.8) 40%, rgba(244, 246, 249, 1) 100%);
             }
-            .contact-grid { flex-direction: column; gap: 1.5rem; }
         }
     </style>
 </head>
@@ -365,11 +424,12 @@
 
     <div class="background-wrapper"></div>
     <div class="background-overlay"></div>
-    <div id="scroll-dimmer"></div> <header id="navbar">
+
+    <header id="navbar">
         <div class="nav-container">
             <div class="logo">IN.</div>
             <nav class="nav-links">
-                <a href="#home">Dossier</a>
+                <a href="#dossier">Dossier</a>
                 <a href="#flight-ops">Flight Ops</a>
                 <a href="#certifications">Certifications</a>
                 <a href="#dispatch">Dispatch Contact</a>
@@ -381,10 +441,25 @@
         <span class="pre-title">Captain Ivan Navarro</span>
         <h1>PILOT IN COMMAND.<br>COMMERCIAL AVIATION.</h1>
         <p class="subtitle">Precision. Leadership. Global Operations.</p>
+    </main>
 
-        <h2 class="services-header" id="flight-ops">Command Competencies</h2>
+    <section class="about-section" id="dossier">
+        <div class="about-container card">
+            <div class="profile-picture-container">
+                <img src="path/to/your/selfie.webp" alt="Captain Ivan Navarro in reflective work vest">
+            </div>
+            <div class="about-text-container">
+                <h2>The Dossier</h2>
+                <p>A seasoned Pilot in Command with extensive experience across domestic and international global airspace. With a flawless safety record and specialized training in advanced aeronautical decision-making, I lead multi-national crews to ensure operational efficiency and passenger security. My commitment to uncompromised adherence to standard operating procedures translates into precision and reliable performance in high-density environments.</p>
+                <p>Currently commanding from my strategic base in Orlando, Florida, focusing on large-scale commercial aviation operations.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="competencies-section" id="flight-ops">
+        <h2 class="services-header">Command Competencies</h2>
         
-        <section class="bento-grid">
+        <div class="bento-grid">
             <div class="card">
                 <div class="icon">
                     <svg viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5" /></svg>
@@ -412,7 +487,7 @@
                 <a href="#" class="card-link">View Certifications <span>→</span></a>
             </div>
         </section>
-    </main>
+    </section>
 
     <section class="dispatch-section" id="dispatch">
         <h2 class="services-header">Operational Clearance</h2>
@@ -421,6 +496,10 @@
             <p>For immediate flight scheduling, operational inquiries, or direct communication routing.</p>
             
             <div class="contact-grid">
+                <div class="contact-item">
+                    <span class="contact-label">Command Center</span>
+                    <span class="contact-value">Orlando, FL</span>
+                </div>
                 <div class="contact-item">
                     <span class="contact-label">Secure Comms Line</span>
                     <span class="contact-value">+1 (555) 019-8372</span>
@@ -485,31 +564,14 @@
             }
         });
 
-        // --- DYNAMIC SCROLL EFFECTS ---
+        // --- NAVIGATION BLUR ON SCROLL ---
         const navbar = document.getElementById('navbar');
-        const scrollDimmer = document.getElementById('scroll-dimmer');
-
         window.addEventListener('scroll', () => {
-            let currentScroll = window.scrollY;
-
-            // 1. Navigation Blur
-            if (currentScroll > 50) {
+            if (window.scrollY > 50) {
                 navbar.classList.add('scrolled');
             } else {
                 navbar.classList.remove('scrolled');
             }
-
-            // 2. Dynamic Background Dimming
-            // Starts at 0, reaches maximum dimness (0.6 opacity) after 600px of scrolling
-            let maxDimOpacity = 0.6; 
-            let scrollDistanceForMaxDim = 600; 
-            let currentFade = currentScroll / scrollDistanceForMaxDim;
-            
-            if (currentFade > maxDimOpacity) {
-                currentFade = maxDimOpacity;
-            }
-            
-            scrollDimmer.style.opacity = currentFade;
         });
     </script>
 </body>
