@@ -35,7 +35,32 @@
             -webkit-font-smoothing: antialiased;
         }
 
-        /* --- BACKGROUND WITH OVERLAY (Bright Sky/Cockpit Vibe) --- */
+        /* --- LOADER SCREEN --- */
+        #loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: var(--text-primary); /* Deep aviation navy background */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease;
+        }
+
+        #glitch-text {
+            color: #ffffff;
+            font-size: clamp(2rem, 6vw, 4rem);
+            font-weight: 800;
+            letter-spacing: 8px;
+            text-transform: uppercase;
+            font-family: monospace; /* Gives that terminal/system boot feel */
+            white-space: pre; /* Prevents text from shifting when spaces are introduced */
+        }
+
+        /* --- BACKGROUND WITH OVERLAY --- */
         .background-wrapper {
             position: fixed;
             top: 0;
@@ -265,6 +290,10 @@
 </head>
 <body>
 
+    <div id="loader">
+        <div id="glitch-text"></div>
+    </div>
+
     <div class="background-wrapper"></div>
     <div class="background-overlay"></div>
 
@@ -318,6 +347,67 @@
     </main>
 
     <script>
+        // --- LOADING SCREEN GLITCH EFFECT ---
+        document.addEventListener("DOMContentLoaded", () => {
+            const targetWord = "WELCOME";
+            const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%&*";
+            const textElement = document.getElementById('glitch-text');
+            const loader = document.getElementById('loader');
+            
+            // Lock scrolling while loading
+            document.body.style.overflow = "hidden";
+            
+            let iteration = 0;
+            
+            // Phase 1: Glitch text in from left to right
+            const glitchInInterval = setInterval(() => {
+                textElement.innerText = targetWord.split("")
+                    .map((letter, index) => {
+                        if (iteration > index) return targetWord[index];
+                        return chars[Math.floor(Math.random() * chars.length)];
+                    })
+                    .join("");
+
+                if (iteration >= targetWord.length) {
+                    clearInterval(glitchInInterval);
+                    // Hold the word on screen for 1 second before reversing
+                    setTimeout(startGlitchOut, 1000); 
+                }
+                iteration += 1 / 4; // Controls resolution speed
+            }, 40);
+
+            // Phase 2: Glitch text out from left to right
+            function startGlitchOut() {
+                iteration = 0;
+                const glitchOutInterval = setInterval(() => {
+                    textElement.innerText = targetWord.split("")
+                        .map((letter, index) => {
+                            // If fully passed, turn to a blank space (keeps layout from collapsing)
+                            if (iteration > index + 1) return "\u00A0"; 
+                            // If actively glitching
+                            if (iteration > index) return chars[Math.floor(Math.random() * chars.length)];
+                            // Unaffected letter
+                            return targetWord[index];
+                        })
+                        .join("");
+
+                    if (iteration >= targetWord.length + 1) {
+                        clearInterval(glitchOutInterval);
+                        
+                        // Phase 3: Fade out the loader panel
+                        loader.style.opacity = "0";
+                        setTimeout(() => {
+                            loader.style.display = "none";
+                            // Re-enable website scrolling
+                            document.body.style.overflow = "auto"; 
+                        }, 500); // Matches the CSS transition duration
+                    }
+                    iteration += 1 / 4; 
+                }, 40);
+            }
+        });
+
+        // --- NAVIGATION BLUR ON SCROLL ---
         const navbar = document.getElementById('navbar');
         window.addEventListener('scroll', () => {
             if (window.scrollY > 50) {
